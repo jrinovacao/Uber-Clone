@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uber_clone/model/Usuario.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Cadastro extends StatefulWidget {
   @override
@@ -35,7 +38,9 @@ class _CadastroState extends State<Cadastro> {
           usuario.nome = nome;
           usuario.email = email;
           usuario.senha = senha;
-          usuario.tipoUsuario = "";
+          usuario.tipoUsuario = usuario.verificaTipoUsuario(_tipoUsuario);
+
+          _cadastrarUsuario(usuario);
 
 
         }else{
@@ -55,6 +60,42 @@ class _CadastroState extends State<Cadastro> {
         _mensagemErro = "Preencha o nome do usuario...!";
       });
     }
+
+  }
+
+
+  _cadastrarUsuario(Usuario usuario){
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+    Firestore db = Firestore.instance;
+
+    auth.createUserWithEmailAndPassword(
+        email: usuario.email,
+        password: usuario.senha
+    ).then((firebaseUser){
+
+      db.collection("usuario")
+          .document(firebaseUser.user.uid)
+          .setData(usuario.toMap());
+
+      //redireciona para o painel de acordo com o tipo de usuario
+        switch(usuario.tipoUsuario){
+          case "motorista" : Navigator.pushAndRemoveUntil(
+              context,
+              "/painel-motorista",
+              (_) => false
+          );
+          break;
+
+          case "passageiro" : Navigator.pushAndRemoveUntil(
+              context,
+              "/painel-passageiro",
+                  (_) => false
+          );
+          break;
+        }
+
+    });
 
   }
 

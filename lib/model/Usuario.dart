@@ -9,6 +9,25 @@ class Usuario{
 
   Usuario();
 
+  Map<String, dynamic> toMap(){
+
+    Map<String, dynamic> map = {
+      "nome" : this.nome,
+      "email" : this.senha,
+      "tipoUsuario" : this.tipoUsuario,
+    };
+
+
+    return map;
+
+  }
+
+  String verificaTipoUsuario(bool tipoUsuario){
+
+    return tipoUsuario ? "motorista" : "passageiro";
+
+  }
+
   String get tipoUsuario => _tipoUsuario;
 
   set tipoUsuario(String value) {
