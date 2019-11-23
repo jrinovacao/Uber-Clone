@@ -9,6 +9,7 @@ final ThemeData temaPadrao = ThemeData(
 void main() => runApp(MaterialApp(
   title: "Uber Clone",
   home: Home(),
+  theme: temaPadrao,
   debugShowCheckedModeBanner: false,
 ));
 
