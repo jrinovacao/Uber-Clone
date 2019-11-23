@@ -13,6 +13,10 @@ class _CadastroState extends State<Cadastro> {
 
   bool _tipoUsuarioPassageiro = false;
 
+  _validarCampos(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,7 +111,7 @@ class _CadastroState extends State<Cadastro> {
                       color: Color(0xff1ebbd8),
                       padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                       onPressed: (){
-
+                          _validarCampos();
                       }
                   ),
                 ),
