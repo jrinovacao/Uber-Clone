@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                    hintText: "email",
+                    hintText: "E-mail",
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      hintText: "senha",
+                      hintText: "Senha",
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(

@@ -16,6 +16,10 @@ class _CadastroState extends State<Cadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Cadastro"),
+      ),
+
       body: Container(
 
         padding: EdgeInsets.all(16),
