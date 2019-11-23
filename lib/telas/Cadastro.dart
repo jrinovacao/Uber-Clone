@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uber_clone/model/Usuario.dart';
 
 class Cadastro extends StatefulWidget {
   @override
@@ -11,10 +12,50 @@ class _CadastroState extends State<Cadastro> {
   TextEditingController _controllerEmail = TextEditingController();
   TextEditingController _controllerSenha = TextEditingController();
 
-  bool _tipoUsuarioPassageiro = false;
+  bool _tipoUsuario = false;
+  String _mensagemErro = "";
 
   _validarCampos(){
-    
+
+    //Recuperar dados dos campos
+    String nome =_controllerNome.text;
+    String email =_controllerEmail.text;
+    String senha =_controllerSenha.text;
+
+    //validar campos
+    if(nome.isNotEmpty){
+      
+      if(email.isNotEmpty && email.contains("@")){
+
+        if(senha.isNotEmpty && senha.length > 6){
+
+
+          Usuario usuario = new Usuario();
+
+          usuario.nome = nome;
+          usuario.email = email;
+          usuario.senha = senha;
+          usuario.tipoUsuario = "";
+
+
+        }else{
+          setState(() {
+            _mensagemErro = "Preencha o senha! digite mais de 6 caracteres...!";
+          });
+        }
+
+      }else{
+        setState(() {
+          _mensagemErro = "Preencha um email valido!";
+        });
+      }
+
+    }else{
+      setState(() {
+        _mensagemErro = "Preencha o nome do usuario...!";
+      });
+    }
+
   }
 
   @override
@@ -88,9 +129,9 @@ class _CadastroState extends State<Cadastro> {
                       children: <Widget>[
                         Text("Passageiro"),
                         Switch(
-                            value: _tipoUsuarioPassageiro,
+                            value: _tipoUsuario,
                             onChanged: (bool valor){
-                                _tipoUsuarioPassageiro = valor;
+                                _tipoUsuario = valor;
                             }
                         ),
                         Text("Motorista"),
@@ -119,7 +160,7 @@ class _CadastroState extends State<Cadastro> {
                   padding: EdgeInsets.only(top: 16),
                   child: Center(
                     child: Text(
-                      "Erro",
+                      _mensagemErro,
                       style: TextStyle(color: Colors.red),
                     ),
                   ),
