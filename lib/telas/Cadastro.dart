@@ -33,7 +33,7 @@ class _CadastroState extends State<Cadastro> {
         if(senha.isNotEmpty && senha.length > 6){
 
 
-          Usuario usuario = new Usuario();
+          Usuario usuario = Usuario();
 
           usuario.nome = nome;
           usuario.email = email;
@@ -74,20 +74,21 @@ class _CadastroState extends State<Cadastro> {
         password: usuario.senha
     ).then((firebaseUser){
 
-      db.collection("usuario")
+      db.collection("usuarios")
           .document(firebaseUser.user.uid)
           .setData(usuario.toMap());
 
       //redireciona para o painel de acordo com o tipo de usuario
         switch(usuario.tipoUsuario){
-          case "motorista" : Navigator.pushAndRemoveUntil(
+          case "motorista" :
+            Navigator.pushNamedAndRemoveUntil(
               context,
               "/painel-motorista",
               (_) => false
           );
           break;
 
-          case "passageiro" : Navigator.pushAndRemoveUntil(
+          case "passageiro" : Navigator.pushNamedAndRemoveUntil(
               context,
               "/painel-passageiro",
                   (_) => false
@@ -193,6 +194,7 @@ class _CadastroState extends State<Cadastro> {
                       color: Color(0xff1ebbd8),
                       padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                       onPressed: (){
+
                           _validarCampos();
                       }
                   ),
