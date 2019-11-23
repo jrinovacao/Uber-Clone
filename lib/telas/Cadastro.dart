@@ -96,6 +96,8 @@ class _CadastroState extends State<Cadastro> {
           break;
         }
 
+    }).catchError((error){
+      _mensagemErro = "Erro ao autenticar usuario, verifique e-mail e senha";
     });
 
   }
